@@ -29,5 +29,7 @@ namespace countWhat.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<countWhat.Models.Counter> Counters { get; set; }
     }
 }
