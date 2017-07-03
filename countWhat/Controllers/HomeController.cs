@@ -14,5 +14,10 @@ namespace countWhat.Controllers
 
             return View();
         }
+
+        public ActionResult Counters()
+        {
+            return View();
+        }
     }
 }
