@@ -57,13 +57,15 @@ namespace countWhat.Controllers
         //bottone edit
         public ActionResult Edit()
         {
-            return View(counters);
+            return View();
         }
 
         [HttpGet]
         public ActionResult Edit(Counter model_edit)
-        {   
-            db.Counters.
+        {
+            /**/
+            db.SaveChanges();
+
             return this.RedirectToAction("Counters");
         }
 
