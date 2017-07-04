@@ -10,7 +10,6 @@ namespace countWhat.Controllers
     public class HomeController : Controller
     {
         ApplicationDbContext db;
-        private object counters;
 
         public HomeController()
         {
@@ -60,10 +59,26 @@ namespace countWhat.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Edit(Counter model_edit)
+        [HttpPost]
+        public ActionResult Edit(Counter model)
         {
-            /**/
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var counter = db.Counters.Find(model.Id);
+
+            if (counter == null)
+            {
+                return View(model);
+            }
+
+            counter.What = model.What;
+            counter.Value = model.Value;
+
+            db.Entry(counter).State = System.Data.Entity.EntityState.Modified;
+
             db.SaveChanges();
 
             return this.RedirectToAction("Counters");
@@ -80,13 +95,13 @@ namespace countWhat.Controllers
         public ActionResult Details(Counter model)
         {   
 
-            return this.RedirectToAction("Counters");
+            return View(model);
         }
 
         //bottone remove
         public ActionResult Delete()
         {
-            return View(counters);
+            return View();
         }
 
         [HttpGet]
