@@ -29,7 +29,8 @@ namespace countWhat.Controllers
         {
 
             var counters = db.Counters.ToList();
-            return View(counters);
+
+            return View(counters); 
         }
 
         //risponde alle richieste /Home/Create
@@ -87,13 +88,16 @@ namespace countWhat.Controllers
         //bottone details
         public ActionResult Details()
         {
-
             return View();
         }
 
         [HttpGet]
         public ActionResult Details(Counter model)
-        {   
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             return View(model);
         }
