@@ -28,8 +28,8 @@ namespace countWhat.Controllers
         //risponde alle richieste /Home/Counters
         public ActionResult Counters()
         {
-            
-            var  counters = db.Counters.ToList();
+
+            var counters = db.Counters.ToList();
             return View(counters);
         }
 
@@ -62,20 +62,22 @@ namespace countWhat.Controllers
 
         [HttpGet]
         public ActionResult Edit(Counter model_edit)
-        {
+        {   
+            db.Counters.
             return this.RedirectToAction("Counters");
         }
-        
+
         //bottone details
         public ActionResult Details()
         {
 
-            return View(counters);
+            return View();
         }
 
         [HttpGet]
         public ActionResult Details(Counter model)
-        {
+        {   
+
             return this.RedirectToAction("Counters");
         }
 
@@ -83,12 +85,12 @@ namespace countWhat.Controllers
         public ActionResult Delete()
         {
             return View(counters);
-         }
+        }
 
         [HttpGet]
-        public ActionResult Delete(Counter )
+        public ActionResult Delete(Counter model)
         {
-            db.Counters.Remove();
+            db.Counters.Remove(model);
             db.SaveChanges();
 
             return this.RedirectToAction("Counters");
