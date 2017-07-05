@@ -78,6 +78,7 @@ namespace countWhat.Controllers
             counter.What = model.What;
             counter.Value = model.Value;
 
+            db.Counters.Add(counter);
             db.Entry(counter).State = System.Data.Entity.EntityState.Modified;
 
             db.SaveChanges();
@@ -94,12 +95,7 @@ namespace countWhat.Controllers
         [HttpGet]
         public ActionResult Details(Counter model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            return this.RedirectToAction("Counters");
+            return View(model);
         }
 
         //bottone remove
@@ -108,12 +104,12 @@ namespace countWhat.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpDelete]
         public ActionResult Delete(Counter model)
         {
             db.Counters.Remove(model);
             db.SaveChanges();
-
+            
             return this.RedirectToAction("Counters");
         }
     }
