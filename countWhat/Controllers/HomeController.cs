@@ -99,7 +99,7 @@ namespace countWhat.Controllers
                 return View(model);
             }
 
-            return View(model);
+            return this.RedirectToAction("Counters");
         }
 
         //bottone remove
