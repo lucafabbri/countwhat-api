@@ -37,7 +37,7 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginRouteForm("Default", new { action = "ConfirmDelete", controller = "Home" })) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

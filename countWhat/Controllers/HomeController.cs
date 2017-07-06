@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace countWhat.Controllers
 {
+    //[RoutePrefix("/Home")]
     public class HomeController : Controller
     {
         ApplicationDbContext db;
@@ -24,6 +25,7 @@ namespace countWhat.Controllers
             return View();
         }
 
+        //[Route("Counters")]
         //risponde alle richieste /Home/Counters
         public ActionResult Counters()
         {
@@ -33,6 +35,7 @@ namespace countWhat.Controllers
             return View(counters); 
         }
 
+        //[Route("Counters")]
         //risponde alle richieste /Home/Create
         public ActionResult Create()
         {
@@ -40,6 +43,7 @@ namespace countWhat.Controllers
         }
 
         [HttpPost]
+        //[Route("Counters")]
         public ActionResult Create(Counter model)
         {
             if (!ModelState.IsValid)
@@ -55,12 +59,20 @@ namespace countWhat.Controllers
         }
 
         //bottone edit
-        public ActionResult Edit()
+        //[Route("Edit/{id}")]
+        public ActionResult Edit(string id)
         {
-            return View();
+            var counter = db.Counters.Find(id);
+            if (counter == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(counter);
         }
 
         [HttpPost]
+        //[Route("Edit/{id}")]
         public ActionResult Edit(Counter model)
         {
             if (!ModelState.IsValid)
@@ -87,27 +99,41 @@ namespace countWhat.Controllers
         }
 
         //bottone details
-        public ActionResult Details()
+        //[Route("Details/{id}")]
+        public ActionResult Details(string id)
         {
-            return View();
-        }
+            var counter = db.Counters.Find(id);
+            if (counter == null)
+            {
+                return HttpNotFound();
+            }
 
-        [HttpGet]
-        public ActionResult Details(Counter model)
-        {
-            return View(model);
+            return View(counter);
         }
 
         //bottone remove
-        public ActionResult Delete()
+        //[Route("Delete/{id}")]
+        public ActionResult Delete(string id)
         {
-            return View();
+            var counter = db.Counters.Find(id);
+            if (counter == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(counter);
         }
 
         [HttpDelete]
-        public ActionResult Delete(Counter model)
+        //[Route("ConfirmDelete/{id}")]
+        public ActionResult ConfirmDelete(string id)
         {
-            db.Counters.Remove(model);
+            var counter = db.Counters.Find(id);
+            if (counter == null)
+            {
+                return HttpNotFound();
+            }
+            db.Counters.Remove(counter);
             db.SaveChanges();
             
             return this.RedirectToAction("Counters");
