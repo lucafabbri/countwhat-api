@@ -288,6 +288,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -302,10 +303,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Counters.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\ConfirmDelete.cshtml" />
+    <Content Include="Views\Home\IncDec.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -108,7 +108,7 @@ namespace countWhat.Controllers
                 return HttpNotFound();
             }
 
-            return View(counter);
+            return this.RedirectToAction("Counters");
         }
 
         //bottone remove
@@ -135,7 +135,42 @@ namespace countWhat.Controllers
             }
             db.Counters.Remove(counter);
             db.SaveChanges();
+            return this.RedirectToAction("Counters");
+        }
+
+        
+        public ActionResult IncDec(string id)
+        {
+            var counter = db.Counters.Find(id);
+            if (counter == null)
+            {
+                return HttpNotFound();
+            }
+            return View(counter);
+        }
+
+        [HttpPost]
+        public ActionResult IncDec(Counter model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var counter = db.Counters.Find(model.Id);
+
+            if (counter == null)
+            {
+                return View(model.Value);
+            }
             
+            counter.Value = model.Value;
+
+            db.Counters.Add(counter);
+            db.Entry(counter).State = System.Data.Entity.EntityState.Modified;
+
+            db.SaveChanges();
+
             return this.RedirectToAction("Counters");
         }
     }
